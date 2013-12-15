@@ -49,24 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_to_search_an_element_in_an_integer_array_when_element_is_present");
+	testStarted("test_1_matchs_all_brackets_of_input_string");
 	setup();
-		test_to_search_an_element_in_an_integer_array_when_element_is_present();
+		test_1_matchs_all_brackets_of_input_string();
 	tearDown();
 	testEnded();
-	testStarted("test_to_search_an_element_in_an_integer_array_when_element_is_not_present");
+	testStarted("test_2_matchs_all_brackets_of_input_string");
 	setup();
-		test_to_search_an_element_in_an_integer_array_when_element_is_not_present();
-	tearDown();
-	testEnded();
-	testStarted("test_to_search_an_element_in_a_character_array_when_element_is_present");
-	setup();
-		test_to_search_an_element_in_a_character_array_when_element_is_present();
-	tearDown();
-	testEnded();
-	testStarted("test_to_search_an_element_in_a_character_array_when_element_is_not_present");
-	setup();
-		test_to_search_an_element_in_a_character_array_when_element_is_not_present();
+		test_2_matchs_all_brackets_of_input_string();
 	tearDown();
 	testEnded();
 

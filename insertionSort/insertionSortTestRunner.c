@@ -49,24 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_to_search_an_element_in_an_integer_array_when_element_is_present");
+	testStarted("test_sorting_an_array_of_integers");
 	setup();
-		test_to_search_an_element_in_an_integer_array_when_element_is_present();
+		test_sorting_an_array_of_integers();
 	tearDown();
 	testEnded();
-	testStarted("test_to_search_an_element_in_an_integer_array_when_element_is_not_present");
+	testStarted("test_sorting_Students_by_roll_number");
 	setup();
-		test_to_search_an_element_in_an_integer_array_when_element_is_not_present();
-	tearDown();
-	testEnded();
-	testStarted("test_to_search_an_element_in_a_character_array_when_element_is_present");
-	setup();
-		test_to_search_an_element_in_a_character_array_when_element_is_present();
-	tearDown();
-	testEnded();
-	testStarted("test_to_search_an_element_in_a_character_array_when_element_is_not_present");
-	setup();
-		test_to_search_an_element_in_a_character_array_when_element_is_not_present();
+		test_sorting_Students_by_roll_number();
 	tearDown();
 	testEnded();
 

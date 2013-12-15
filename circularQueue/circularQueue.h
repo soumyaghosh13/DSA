@@ -1,18 +1,17 @@
 #include <stdbool.h>
-
-
-typedef char string[50];
 typedef struct{
-        void* elements;
+        void* base;
+        int length;
         int elementSize;
-        int front;
         int rear;
-        int no_of_elements;
-}queue;
+        int front;
+}Queue;
 
 
-queue* create(int elementSize, int no_of_elements);
-bool enqueue(queue* queue,void* element);
-void* dequeue(queue* queue);
-bool isFull(queue* queue);
-bool isEmpty(queue* queue);
+typedef char String[256];
+Queue* create(int elementSize,int length);
+int enqueue(Queue* queue, void* element);
+void* dequeue(Queue* queue);
+int queueIsEmpty(Queue* queue);
+int queueIsFull(Queue* queue);
+

@@ -1,5 +1,5 @@
 #include "testUtils.h"
-#include "linkedList.h"
+#include "LinkedList.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -7,37 +7,37 @@
 //createLinkedList setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 
-int element1,element2,element3,res;
-int *elementToinsertNode1,*elementToinsertNode2,*elementToinsertNode3;
-linkedList* list;
-void* elementToinsertNode;
+char testElement1, testElement2, testElement3,temp;
+char *insertElement1,*insertElement2,*insertElement3;
+LinkedList* list;
+void* elementToInsertNode;
 
 
 void assignSpaceAndData(int bytes,void* content){
-        elementToinsertNode = calloc(1,bytes);
-        memcpy(elementToinsertNode,content,bytes);
+        elementToInsertNode = calloc(1,bytes);
+        memcpy(elementToInsertNode,content,bytes);
 };
 
 
 void setup(){
         list = createLinkedList();
-        element1 = 20;
-        element2 = 40;
-        element3 = 60;
-        elementToinsertNode1 = malloc(sizeof(int));
-        elementToinsertNode2 = malloc(sizeof(int));
-        elementToinsertNode3 = malloc(sizeof(int));
-        memcpy(elementToinsertNode1,&element1,sizeof(int));
-        memcpy(elementToinsertNode2,&element2,sizeof(int));
-        memcpy(elementToinsertNode3,&element3,sizeof(int));
+        testElement1 = 20;
+        testElement2 = 40;
+        testElement3 = 60;
+        insertElement1 = malloc(sizeof(int));
+        insertElement2 = malloc(sizeof(int));
+        insertElement3 = malloc(sizeof(int));
+        memcpy(insertElement1,&testElement1,sizeof(int));
+        memcpy(insertElement2,&testElement2,sizeof(int));
+        memcpy(insertElement3,&testElement3,sizeof(int));
 };
 
 
 void teardown(){
-        free(elementToinsertNode1);
-        free(elementToinsertNode2);
-        free(elementToinsertNode3);
-        free(elementToinsertNode);
+        free(insertElement1);
+        free(insertElement2);
+        free(insertElement3);
+        free(elementToInsertNode);
         free(list);
 };
 
@@ -47,94 +47,70 @@ void test_creation_of_linked_list(){
         ASSERT(NULL == list->head);
 };
 
-
-void test_insertNodeing_first_integer_node_in_linked_list(){
-        int element = 10;
-        assignSpaceAndData(sizeof(int),&element);
-        res = insertNode(list,elementToinsertNode,1);
-        ASSERT(1 == res);
-        ASSERT(NULL == list->head->next);
-        ASSERT(NULL == list->head->previous);
-        ASSERT(element == *(int*)list->head->data);
+void test_insert_Node_at_first_position_in_list(){
+        temp = insertNode(list,insertElement1,1);
+        temp = insertNode(list,insertElement2,1);
+        ASSERT(40 == *(int*)list->head->data);
+        ASSERT(20 == *(int*)list->head->next->data);
 };
 
-void test_insertNodeing_first_String_node_in_linked_list(){
-        String element = "swamiji";
-        assignSpaceAndData(sizeof(String),&element);
-        res = insertNode(list,elementToinsertNode,1);
-        ASSERT(1 == list->length);
-        ASSERT(1 == res);
-        ASSERT(0 == strcmp(element,*(String*)list->head->data));
-};
-
-void test_insertNode_element_in_middle(){
+void test_insert_Node_in_middle_of_linked_list(){
         Node* node;
-        res = insertNode(list,elementToinsertNode1,1);
-        res = insertNode(list,elementToinsertNode2,2);
-        res = insertNode(list,elementToinsertNode3,2);
+        temp = insertNode(list,insertElement1,1);
+        temp = insertNode(list,insertElement2,2);
+        temp = insertNode(list,insertElement3,2);
         ASSERT(60 == *(int*)list->head->next->data);
         ASSERT(20 == *(int*)list->head->data);
         ASSERT(40 == *(int*)list->head->next->next->data);
 };
 
-
-void test_insertNode_at_first_position_in_list(){
-        res = insertNode(list,elementToinsertNode1,1);
-        res = insertNode(list,elementToinsertNode2,1);
-        ASSERT(40 == *(int*)list->head->data);
-        ASSERT(20 == *(int*)list->head->next->data);
+void test_for_negetive_index_insertion_should_failed(){
+        temp = insertNode(list,insertElement1,-1);
+        ASSERT(0 == temp);
 };
 
-void test_deleting_first_node(){
+void test_delete_first_node_of_linked_list(){
         Node* node;
-        res = insertNode(list,elementToinsertNode1,1);
-        res = insertNode(list,elementToinsertNode2,2);
+        temp = insertNode(list,insertElement1,1);
+        temp = insertNode(list,insertElement2,2);
         node = removeNode(list,1);
-        ASSERT(element1 == *(int*)node->data);
-        ASSERT(element2 == *(int*)list->head->data);
+        ASSERT(testElement1 == *(int*)node->data);
+        ASSERT(testElement2 == *(int*)list->head->data);
 };
 
 
-void test_deleting_last_node(){
+void test_delete_last_node_of_linked_list(){
         Node* node;
-        res = insertNode(list,elementToinsertNode1,1);
-        res = insertNode(list,elementToinsertNode2,2);
+        temp = insertNode(list,insertElement1,1);
+        temp = insertNode(list,insertElement2,2);
         node = removeNode(list,2);
-        ASSERT(element2 == *(int*)node->data);
-        ASSERT(element1 == *(int*)list->head->data);        
+        ASSERT(testElement2 == *(int*)node->data);
+        ASSERT(testElement1 == *(int*)list->head->data);        
 };
 
 
-void test_deleting_node_from_middle(){
+void test_delete_any_node_of_linked_list(){
         Node* node;
         Node* secondNode;
-        res = insertNode(list,elementToinsertNode1,1);
-        res = insertNode(list,elementToinsertNode2,2);
-        res = insertNode(list,elementToinsertNode3,3);
+        temp = insertNode(list,insertElement1,1);
+        temp = insertNode(list,insertElement2,2);
+        temp = insertNode(list,insertElement3,3);
         node = removeNode(list,2);
-        ASSERT(element2 == *(int*)node->data);
-        ASSERT(element1 == *(int*)list->head->data);
+        ASSERT(testElement2 == *(int*)node->data);
+        ASSERT(testElement1 == *(int*)list->head->data);
         secondNode = list->head->next;
-        ASSERT(element3 == *(int*)secondNode->data);
-        ASSERT(element1 == *(int*)secondNode->previous->data);
+        ASSERT(testElement3 == *(int*)secondNode->data);
+        ASSERT(testElement1 == *(int*)secondNode->previous->data);
 };
 
-void test_when_index_is_negative_node_should_not_be_insertNodeed(){
-        res = insertNode(list,elementToinsertNode1,-1);
-        ASSERT(0 == res);
-};
-
-
-void test_when_index_exceeds_lists_length_then_insertNodeion_should_fail(){
-        res = insertNode(list,elementToinsertNode1,2);
-        ASSERT(0 == res);
-};
-
-void test_deleting_the_String_node_when_only_one_node_is_present(){
+void test_delete_node_when_linked_list_contain_one_node(){
         Node* node;
         String element  = "soumya";
         assignSpaceAndData(sizeof(String),&element);
-        res = insertNode(list,elementToinsertNode,1);
+        temp = insertNode(list,elementToInsertNode,1);
         node = removeNode(list,1);
         ASSERT(0 == strcmp(element,node->data));
 };
+
+
+

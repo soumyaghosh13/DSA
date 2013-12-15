@@ -1,68 +1,106 @@
 #include "testUtils.h"
-#include "circularqueue.h"
+#include "circularQueue.h"
+#include <memory.h>
 #include <stdlib.h>
-#include <string.h>
+
+
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
+Queue *queue;
 
-void test_create_queue_creates_queue(){
-        int i;
-        queue* queue;
-        int test_arr[] = {0,0,0,0,0};
-        queue = create(sizeof(int),5);
-        i=memcmp(test_arr,queue->elements,5);
-        ASSERT(!i);
-        ASSERT(queue->elementSize == 4);
-        ASSERT(queue->front == -1);
-        ASSERT(queue->rear == -1);
-        ASSERT(queue->no_of_elements == 5);
+
+void tearDown(){
+        free(queue->base);
+    free(queue);
 }
 
-void test_enqueue_char_element_at_end_of_queue(){
-        queue* queue;
-        char c='S';
-        queue = create(sizeof(char),5);
-        ASSERT(enqueue(queue,&c));
-        ASSERT(*(char*)(queue->elements)=='S');
-        ASSERT(queue->rear==0);
-        free(queue);
+int areEqual(Queue a, Queue b){
+        int result = a.length == b.length && a.front == b.front
+                                && a.rear == b.rear &&  a.elementSize == b.elementSize ;
+        if(!result) return result;
+        return 0 == memcmp(a.base,b.base,a.length*a.elementSize);
 }
 
-void test_enqueue_char_element_at_middle_of_queue(){
-        queue* queue;
-        char c='K';
-        queue = create(sizeof(char),6);
-        queue->rear = 3;
-        ASSERT(enqueue(queue,&c));
-        ASSERT(*(char*)(queue->elements+queue->rear*queue->elementSize) == 'K');
-        ASSERT(queue->rear == 4);
-        free(queue);
+void test_creates_a_queue_of_integers(){
+        int arr[2] = {0,0};
+        Queue expected = {arr,2,sizeof(int),-1,-1};
+        queue = create(sizeof(int),2);
+        ASSERT(areEqual(expected, *queue));
+};
+
+void test_creates_a_queue_of_strings (){
+        String arr_blank[3] = {"","",""};
+        Queue expected = {arr_blank,3,sizeof(String),-1,-1};
+        queue = create(sizeof(String),3);
+        ASSERT(areEqual(expected, *queue));
+};
+
+void test_inserts_integer_element_in_queue(){
+        int int_arr[3] = {1,2,0};
+        int first = 1,
+                second = 2;
+        Queue expected = {int_arr,3,sizeof(int),1,0};
+        queue = create(sizeof(int), 3);
+        enqueue(queue,&first);
+        enqueue(queue,&second);
+        ASSERT(areEqual(expected, *queue));
 }
 
-void test_enqueue_char_element_return_false_when_queue_is_full(){
-        queue* queue;
-        char c='Q';
-        queue = create(sizeof(char),6);
-        queue->rear = 5;
-        queue->front = -1;
-        ASSERT(!enqueue(queue,&c));
-        ASSERT(queue->rear == 5);
-        free(queue);
+void test_inserts_String_elements_in_queue_at_end(){
+        String string_arr[3] = {"Soumya","Ghosh",""};
+        String name1 = "Soumya",
+                           name2 = "Ghosh";
+        Queue expected = {string_arr,3,sizeof(String),1,0};
+        queue = create(sizeof(String), 3);
+        enqueue(queue,name1);
+        enqueue(queue,name2);
+        ASSERT(areEqual(expected, *queue));
 }
 
-void test_dequeue_string_element_at_front_of_queue(){
-        void* element;
-        queue* queue;
-        string data[]={"soumya","mohit","sandesh"};
-        queue = create(sizeof(string),5);
-        enqueue(queue,&data[0]);
-        enqueue(queue,&data[1]);
-        enqueue(queue,&data[2]);
-        ASSERT(queue->rear == 2);
-        ASSERT(queue->front == -1);
-        element = dequeue(queue);
-        ASSERT(!strcmp(*(string*)element , "soumya"));
-        ASSERT(queue->rear == 2);
-        ASSERT(queue->front == 0);
+void test_enqueue_in_full_queue_return_zero(){
+        int res;
+        String name1 = "Sam",
+                           name2 = "Soumya",
+                           name3 = "Ghosh";
+        queue = create(sizeof(String), 2);
+        enqueue(queue,name1);
+        enqueue(queue,name2);
+        res = enqueue(queue, name3);
+        ASSERT(0 == res);
 }
 
+void test_successful_enqueue_return_one(){
+        int res;
+        String name1 = "Soumya";
+        queue = create(sizeof(String), 2);
+        res = enqueue(queue, name1);
+        ASSERT(1 == res);
+}
+
+void test_dequeues_from_integer_queue(){
+        int* res;
+    int first = 1,
+            second = 2;
+        queue = create(sizeof(int), 3);
+        enqueue(queue, &first);
+        enqueue(queue, &second);
+        res = dequeue(queue);
+        ASSERT(1 == *res);
+        ASSERT(1 == queue->front);
+}
+
+void test_dequeues_the_first_element_of_queue_of_strings(){
+        String* res;
+    String name1 = "Soumya",
+               name2 = "Ghosh";
+        queue = create(sizeof(String), 3);
+        enqueue(queue, &name1);
+        enqueue(queue, &name2);
+        res = dequeue(queue);
+        ASSERT(strcmp("Soumya",*res)== 0);
+}
+
+void test_dequeue_from_empty_queue_return_zero(){
+        queue = create(sizeof(String), 2);
+        ASSERT(NULL == dequeue(queue));
+}

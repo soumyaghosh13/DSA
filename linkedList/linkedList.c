@@ -1,23 +1,23 @@
-#include "linkedList.h"
+#include "LinkedList.h"
 #include <stdlib.h>
 
 
-linkedList* createLinkedList() {
-        linkedList* linkedList = calloc(1,sizeof(linkedList));
-        linkedList->length = 0;
-        linkedList->head = NULL;
-        return linkedList;
+LinkedList* createLinkedList() {
+        LinkedList* LinkedList = calloc(1,sizeof(LinkedList));
+        LinkedList->length = 0;
+        LinkedList->head = NULL;
+        return LinkedList;
 };
 
 
-int insertAtBeginning(Node* node,Node* nodeToInsert,linkedList* linkedList){
+int insertAtBeginning(Node* node, Node* nodeToInsert, LinkedList* LinkedList){
         nodeToInsert->next = node;
         node->previous = nodeToInsert;
-        linkedList->head = nodeToInsert;
+        LinkedList->head = nodeToInsert;
         return 1;
 };
 
-int insetAnyPlace(Node* node,Node* nodeToInsert,linkedList* linkedList){
+int insetAnyPlace(Node* node, Node* nodeToInsert, LinkedList* LinkedList){
         nodeToInsert->previous = node;
         nodeToInsert->next = node->next;
         node->next = nodeToInsert;
@@ -26,48 +26,48 @@ int insetAnyPlace(Node* node,Node* nodeToInsert,linkedList* linkedList){
         return 1;
 };
 
-int insertNode(linkedList* linkedList,void* element,int index){
+int insertNode(LinkedList* LinkedList,void* element,int index){
         int i;
         Node* nodeToInsert = calloc(1,sizeof(Node));
-        Node* node = linkedList->head;
+        Node* node = LinkedList->head;
         Node* nextNode;
         nodeToInsert->data = element;
-        if((index <= 0 )|| (index >(linkedList->length+1)))  return 0;
-        linkedList->length++;
-        if(linkedList->head == NULL){
-                linkedList->head = nodeToInsert;
+        if((index <= 0 )|| (index >(LinkedList->length+1)))  return 0;
+        LinkedList->length++;
+        if(LinkedList->head == NULL){
+                LinkedList->head = nodeToInsert;
                 return 1;
         }
         for(i=1;i<index-1;i++)
                 node = node->next;
         if(index == 1)
-                return insertAtBeginning(node,nodeToInsert,linkedList);
-        return insetAnyPlace(node,nodeToInsert,linkedList);
+                return insertAtBeginning(node,nodeToInsert,LinkedList);
+        return insetAnyPlace(node,nodeToInsert,LinkedList);
 };
 
 
-Node* setLinkToNull(Node* node){
+Node* dispose(Node* node){
         node->previous = NULL;
         node->next = NULL;
         return node;
 }
 
 
-Node* removeNode(linkedList *linkedList, int index){
+Node* removeNode(LinkedList *LinkedList, int index){
         int i;
         Node* nodeToDelete;
         Node* node;
-        nodeToDelete = linkedList->head;
+        nodeToDelete = LinkedList->head;
         for(i=1;i<index;i++)
                 nodeToDelete = nodeToDelete->next;
         if(NULL == nodeToDelete->previous){
-                linkedList->head = nodeToDelete->next;
-                return setLinkToNull(nodeToDelete);
+                LinkedList->head = nodeToDelete->next;
+                return dispose(nodeToDelete);
         }
         node = nodeToDelete->previous;
         node->next = nodeToDelete->next;
         if(node->next!=NULL)
                 node->next->previous = node;
-        return setLinkToNull(nodeToDelete);
+        return dispose(nodeToDelete);
 };
 
