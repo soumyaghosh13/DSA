@@ -13,76 +13,46 @@ void test_create_stack(){
     ASSERT(stack->length == 0);         
 }
 
-void test_push_integer_element_at_start_of_stack(){
+void test_push_integer_in_stack(){
     Stack* stack;
-    int element = 10;
+    int element = 100;
     stack = createStack();
     push(stack , &element);
-    ASSERT(*(int*)stack->head->data == 10);         
+    ASSERT(*(int*)stack->head->data == 100);         
     ASSERT(stack->length == 1);         
 }
 
-void test_push_double_element_at_start_of_stack(){
-    Stack* stack;
-    double element = 10.0;
-    stack = createStack();
-    push(stack , &element);
-    ASSERT(*(double*)stack->head->data == 10.0);         
-    ASSERT(stack->length == 1);         
-}
-
-void test_push_character_element_at_start_of_stack(){
-    Stack* stack;
-    char element = 'a';
-    stack = createStack();
-    push(stack , &element);
-    ASSERT(*(char*)stack->head->data == 'a');         
-    ASSERT(stack->length == 1);         
-}
-
-void test_push_string_element_at_start_of_stack(){
+void test_push_string_in_stack(){
     Stack* stack;
     String element;
-    strcpy(element , "abc");
+    strcpy(element , "sam");
     stack = createStack();
     push(stack , &element);
-    ASSERT(!strcmp(*(String*)stack->head->data , "abc"));         
+    ASSERT(!strcmp(*(String*)stack->head->data , "sam"));         
     ASSERT(stack->length == 1);         
 }
 
-void test_pop_int_element_at_top_of_stack(){
+void test_pop_int_from_stack(){
     Stack* stack;
     int data;
-    int element1 = 10,
-    	element2 = 20;
+    int element1 = 100,
+    	element2 = 250;
     stack = createStack();
     push(stack , &element1);
     push(stack , &element2);
     data =(int)pop(stack);         
     ASSERT(stack->length == 1);         
-    ASSERT(*(int*)data == 20);         
+    ASSERT(*(int*)data == 250);         
 }
 
-void test_pop_double_element_at_top_of_stack(){
+void test_top_char_from_stack(){
     Stack* stack;
-    int data;
-    double element1 = 10.0,element2 = 20.0;
+    char data;
+    char element1 = 's',
+    	element2 = 'g';
     stack = createStack();
     push(stack , &element1);
     push(stack , &element2);
-    data =(int)pop(stack);         
-    ASSERT(stack->length == 1);         
-    ASSERT(*(double*)data == 20.0);         
-}
-
-void test_gives_the_topmost_int_element_at_top_of_stack(){
-    Stack* stack;
-    int data;
-    int element1 = 10,
-    	element2 = 20;
-    stack = createStack();
-    push(stack , &element1);
-    push(stack , &element2);
-    data =(int)top(stack);         
-    ASSERT(*(int*)data == 20);         
+    data =(char)top(stack);         
+    ASSERT(*(char*)data == 'g');         
 }

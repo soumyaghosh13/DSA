@@ -43,12 +43,12 @@ int enqueue(Queue* queue, void* element){
 }
 
 void* dequeue(Queue *queue){
-        void* copyFrom;
+        void* temp;
         void* deletedElement = malloc(queue->elementSize);
         if(queueIsEmpty(queue))
                 return NULL;
-        copyFrom = queue->base+(queue->front*queue->elementSize);
-        memcpy(deletedElement,copyFrom, queue->elementSize);
+        temp = queue->base+(queue->front*queue->elementSize);
+        memcpy(deletedElement,temp, queue->elementSize);
         queue->front++;
         return deletedElement;
 }

@@ -49,44 +49,24 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_create_a_stack_int");
+	testStarted("test_inserts_an_Integer_element_in_queue");
 	setup();
-		test_create_a_stack_int();
+		test_inserts_an_Integer_element_in_queue();
 	tearDown();
 	testEnded();
-	testStarted("test_creates_a_stack_for_string");
+	testStarted("test_inserts_String_at_rear_of_queue");
 	setup();
-		test_creates_a_stack_for_string();
+		test_inserts_String_at_rear_of_queue();
 	tearDown();
 	testEnded();
-	testStarted("test_push_int_into_stack");
+	testStarted("test_enQueue_returns_one_for_sucessful_insert");
 	setup();
-		test_push_int_into_stack();
+		test_enQueue_returns_one_for_sucessful_insert();
 	tearDown();
 	testEnded();
-	testStarted("test_no_limit_of_push_element");
+	testStarted("test_enQueue_returns_zero_trying_ti_insert_in_full_queue");
 	setup();
-		test_no_limit_of_push_element();
-	tearDown();
-	testEnded();
-	testStarted("test_pop_element_from_stack");
-	setup();
-		test_pop_element_from_stack();
-	tearDown();
-	testEnded();
-	testStarted("test_pop_element_from_empty_stack_gives_null");
-	setup();
-		test_pop_element_from_empty_stack_gives_null();
-	tearDown();
-	testEnded();
-	testStarted("test_peek_gives_the_top_element_of_int_stack");
-	setup();
-		test_peek_gives_the_top_element_of_int_stack();
-	tearDown();
-	testEnded();
-	testStarted("test_peek_gives_top_element_of_String_stack");
-	setup();
-		test_peek_gives_top_element_of_String_stack();
+		test_enQueue_returns_zero_trying_ti_insert_in_full_queue();
 	tearDown();
 	testEnded();
 
@@ -96,8 +76,6 @@ int main(){
 }
 
 void setup(){}
-
-void tearDown(){}
 
 void fixtureSetup(){}
 

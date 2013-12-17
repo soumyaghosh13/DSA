@@ -1,9 +1,12 @@
-#include "./include/linkList.h"
+#include "linkedList.h"
 #include <stdbool.h>
 
-typedef char String[256];
-typedef  DList Stack;
+typedef  LinkedList Stack;
+
 Stack* createStack();
-bool push(Stack* stack,void* element);
+
+bool push(Stack* stack, void* element);
+
 void* pop(Stack* stack);
+
 void* top(Stack* stack);

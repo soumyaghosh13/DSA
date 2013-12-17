@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include <memory.h>
 
-void* getElement(Stack *stack,int top){
-        return(stack->base + (top * stack->elementSize));
-}
-
 Stack *create(int length, int elementSize){
     Stack* stack;
     stack = (Stack*)calloc(sizeof(Stack), 1);
@@ -14,6 +10,22 @@ Stack *create(int length, int elementSize){
     stack->top = 0;
     stack->elementSize = elementSize;
     return stack;
+}
+
+int isEmpty(Stack* stack){
+        if(stack->top)
+                return 0;
+        return 1;
+}
+
+int isFull(Stack* stack){
+        if(stack->top==stack->length)
+                return 1;
+        return 0;
+}
+
+void* getDataFromTop(Stack *stack,int top){
+        return(stack->base + (top * stack->elementSize));
 }
 
 bool push(Stack* stack,void* element){
@@ -25,30 +37,18 @@ bool push(Stack* stack,void* element){
                 stack->base = newSize;
                 stack->length *= 2;
         }
-        memcpy(getElement(stack,(stack->top++)), element, stack->elementSize);
+        memcpy(getDataFromTop(stack,(stack->top++)), element, stack->elementSize);
         return true;
 }
 
 void* pop(Stack* stack){
     if(isEmpty(stack))
         return NULL;
-    return getElement(stack,(--stack->top));
+    return getDataFromTop(stack,(--stack->top));
 }
 
 void* peek(Stack* stack){
-        return getElement(stack,(stack->top-1));
+        return getDataFromTop(stack,(stack->top-1));
 }
 
 
-int isEmpty(Stack* stack){
-        if(stack->top)
-                return 0;
-        return 1;
-}
-
-
-int isFull(Stack* stack){
-        if(stack->top==stack->length)
-                return 1;
-        return 0;
-}
