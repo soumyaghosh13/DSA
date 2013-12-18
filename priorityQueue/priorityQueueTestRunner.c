@@ -69,6 +69,11 @@ int main(){
 		test_enQueue_returns_zero_trying_ti_insert_in_full_queue();
 	tearDown();
 	testEnded();
+	testStarted("test_dequeues_from_integer_queue");
+	setup();
+		test_dequeues_from_integer_queue();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
