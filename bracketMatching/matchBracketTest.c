@@ -53,4 +53,10 @@ void test_return_zero_if_brackets_are_not_in_order(){
         ASSERT(0 == result);	
 }
 
+void test_2return_zero_if_brackets_are_not_in_order(){
+                char* input = "{[[{{}]}";
+        int result;
+        result = isBracketMatching(input);
+        ASSERT(0 == result);    
+}
 

@@ -49,44 +49,59 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_first_brackets_of_input_string_match");
+	testStarted("test_insert_element");
 	setup();
-		test_first_brackets_of_input_string_match();
+		test_insert_element();
 	tearDown();
 	testEnded();
-	testStarted("test_second_brackets_of_input_string_match");
+	testStarted("test_insert_multiple_elements");
 	setup();
-		test_second_brackets_of_input_string_match();
+		test_insert_multiple_elements();
 	tearDown();
 	testEnded();
-	testStarted("test_third_brackets_of_input_string_match");
+	testStarted("test_interns_grows_beyond_capacity");
 	setup();
-		test_third_brackets_of_input_string_match();
+		test_interns_grows_beyond_capacity();
 	tearDown();
 	testEnded();
-	testStarted("test_combination_of_second_and_first_bracket_of_input_string_match");
+	testStarted("test_should_not_insert_at_index_beyond_length");
 	setup();
-		test_combination_of_second_and_first_bracket_of_input_string_match();
+		test_should_not_insert_at_index_beyond_length();
 	tearDown();
 	testEnded();
-	testStarted("test_combination_of_third_second_and_first_bracket_of_input_string_match");
+	testStarted("test_should_not_insert_at_negative_index");
 	setup();
-		test_combination_of_third_second_and_first_bracket_of_input_string_match();
+		test_should_not_insert_at_negative_index();
 	tearDown();
 	testEnded();
-	testStarted("test_return_zero_if_bracket_of_given_equation_are_not_matched");
+	testStarted("test_insert_at_middle_should_shift_the_elements");
 	setup();
-		test_return_zero_if_bracket_of_given_equation_are_not_matched();
+		test_insert_at_middle_should_shift_the_elements();
 	tearDown();
 	testEnded();
-	testStarted("test_return_zero_if_brackets_are_not_in_order");
+	testStarted("test_should_not_insert_when_list_is_null");
 	setup();
-		test_return_zero_if_brackets_are_not_in_order();
+		test_should_not_insert_when_list_is_null();
 	tearDown();
 	testEnded();
-	testStarted("test_2return_zero_if_brackets_are_not_in_order");
+	testStarted("test_should_get_index_of_search_element");
 	setup();
-		test_2return_zero_if_brackets_are_not_in_order();
+		test_should_get_index_of_search_element();
+	tearDown();
+	testEnded();
+	testStarted("test_should_get_minus_1_if_element_not_found");
+	setup();
+		test_should_get_minus_1_if_element_not_found();
+	tearDown();
+	testEnded();
+	testStarted("test_add_adds_to_end_of_list");
+	setup();
+		test_add_adds_to_end_of_list();
+	tearDown();
+	testEnded();
+	testStarted("test_add_adds_multiple_data_to_end_of_list");
+	setup();
+		test_add_adds_multiple_data_to_end_of_list();
 	tearDown();
 	testEnded();
 
@@ -94,10 +109,6 @@ int main(){
 	fixtureTearDown();
 	return 0;
 }
-
-void setup(){}
-
-void tearDown(){}
 
 void fixtureSetup(){}
 

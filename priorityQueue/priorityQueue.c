@@ -7,7 +7,7 @@ int compareData ( void* a,  void* b){
 }
 
 int priorityEnqueue(Queue* queue, void* element,compare comp){
-    int j = (queue->rear)-1;
+    int temp = (queue->rear)-1;
     void* elementToCompare;
     int comparisonResult;
     if(queueIsFull(queue))
@@ -20,8 +20,8 @@ int priorityEnqueue(Queue* queue, void* element,compare comp){
     }
     else{
         queue->rear++;
-        for (j = queue->rear-1; j >= queue->front; j--) {
-            elementToCompare = queue->base + j * queue->elementSize;
+        for (temp = queue->rear-1; temp >= queue->front; temp--) {
+            elementToCompare = queue->base + temp * queue->elementSize;
             comparisonResult = comp(element, elementToCompare);
             if (comparisonResult >= 0) {
                 break; 
@@ -29,7 +29,7 @@ int priorityEnqueue(Queue* queue, void* element,compare comp){
             memmove(elementToCompare + queue->elementSize, 
                     elementToCompare, queue->elementSize);                                     
         } 
-        memmove(queue->base+((j+1)*queue->elementSize), element, queue->elementSize);
+        memmove(queue->base+((temp+1)*queue->elementSize), element, queue->elementSize);
         return 1;   
     }
     memmove(queue->base+(queue->rear*queue->elementSize), element, queue->elementSize);

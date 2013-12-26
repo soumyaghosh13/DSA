@@ -49,6 +49,16 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
+	testStarted("test_create_stack");
+	setup();
+		test_create_stack();
+	tearDown();
+	testEnded();
+	testStarted("test_push_integer_in_stack");
+	setup();
+		test_push_integer_in_stack();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

@@ -1,16 +1,17 @@
-typedef struct node {
-        void* data;
-        struct node* next;
-        struct node* previous;
-} Node;
-
-typedef struct {
-        int length;
-        Node* head;
-} LinkedList;
-
 typedef char String[256];
+typedef struct node{
+        struct node* next;
+        struct node* prev;
+        void* data;
+}Node;
 
-LinkedList* createLinkedList();
-int insertNode(LinkedList* list, void* element, int index);
-Node* removeNode(LinkedList* list, int index);
+typedef struct list{
+        Node* head;
+        int length;
+}DList;
+
+DList* create();
+Node* createNode(Node *prevAddress, Node *nextAddress);
+int insertNode(DList* list,void* data,int index);
+int deleteNode(DList* list,int index);
+

@@ -1,10 +1,9 @@
-#include <stdbool.h>
 typedef struct{
-        void* base;
-        int length;
-        int elementSize;
-        int rear;
-        int front;
+    void* base;
+    int length;
+    int elementSize;
+    int rear;
+    int front;
 }Queue;
 
 

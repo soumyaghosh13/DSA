@@ -8,9 +8,9 @@
 
 Queue *queue;
 
-
+//setup
 void tearDown(){
-        free(queue->base);
+    free(queue->base);//not needed
     free(queue);
 }
 
@@ -36,14 +36,13 @@ void test_creates_a_queue_of_strings (){
 };
 
 void test_inserts_integer_element_in_queue(){
-        int int_arr[3] = {1,2,0};
-        int first = 1,
-                second = 2;
-        Queue expected = {int_arr,3,sizeof(int),1,0};
-        queue = create(sizeof(int), 3);
-        enqueue(queue,&first);
-        enqueue(queue,&second);
-        ASSERT(areEqual(expected, *queue));
+    int int_arr[3] = {1,2,0};
+    int first = 1,second = 2;
+    Queue expected = {int_arr,3,sizeof(int),1,0};
+    queue = create(sizeof(int), 3);
+    enqueue(queue,&first);
+    enqueue(queue,&second);
+    ASSERT(areEqual(expected, *queue));
 }
 
 void test_inserts_String_elements_in_queue_at_end(){
@@ -58,15 +57,15 @@ void test_inserts_String_elements_in_queue_at_end(){
 }
 
 void test_enqueue_in_full_queue_return_zero(){
-        int res;
-        String name1 = "Sam",
-                           name2 = "Soumya",
-                           name3 = "Ghosh";
-        queue = create(sizeof(String), 2);
-        enqueue(queue,name1);
-        enqueue(queue,name2);
-        res = enqueue(queue, name3);
-        ASSERT(0 == res);
+    int res;
+    String name1 = "Sam",
+      name2 = "Soumya",
+      name3 = "Ghosh";
+    queue = create(sizeof(String), 2);
+    enqueue(queue,name1);
+    enqueue(queue,name2);
+    res = enqueue(queue, name3);
+    ASSERT(0 == res);
 }
 
 void test_successful_enqueue_return_one(){

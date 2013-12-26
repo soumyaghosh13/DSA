@@ -49,14 +49,14 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_for_add_new_process");
+	testStarted("test_add_first_process");
 	setup();
-		test_for_add_new_process();
+		test_add_first_process();
 	tearDown();
 	testEnded();
-	testStarted("test_for_schedule_process");
+	testStarted("test_add_process_with_priority_higher_than_first_process");
 	setup();
-		test_for_schedule_process();
+		test_add_process_with_priority_higher_than_first_process();
 	tearDown();
 	testEnded();
 
@@ -66,8 +66,6 @@ int main(){
 }
 
 void setup(){}
-
-void tearDown(){}
 
 void fixtureSetup(){}
 

@@ -49,36 +49,6 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_inserts_an_Integer_element_in_queue");
-	setup();
-		test_inserts_an_Integer_element_in_queue();
-	tearDown();
-	testEnded();
-	testStarted("test_inserts_String_at_rear_of_queue");
-	setup();
-		test_inserts_String_at_rear_of_queue();
-	tearDown();
-	testEnded();
-	testStarted("test_enQueue_returns_one_for_sucessful_insert");
-	setup();
-		test_enQueue_returns_one_for_sucessful_insert();
-	tearDown();
-	testEnded();
-	testStarted("test_enQueue_returns_zero_while_trying_to_insert_in_full_queue");
-	setup();
-		test_enQueue_returns_zero_while_trying_to_insert_in_full_queue();
-	tearDown();
-	testEnded();
-	testStarted("test_dequeues_from_integer_queue");
-	setup();
-		test_dequeues_from_integer_queue();
-	tearDown();
-	testEnded();
-	testStarted("test_dequeue_from_empty_queue_return_zero");
-	setup();
-		test_dequeue_from_empty_queue_return_zero();
-	tearDown();
-	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
@@ -86,6 +56,8 @@ int main(){
 }
 
 void setup(){}
+
+void tearDown(){}
 
 void fixtureSetup(){}
 

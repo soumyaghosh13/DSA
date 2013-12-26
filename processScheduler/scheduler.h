@@ -1,14 +1,25 @@
-# include "../bracketMatching/stack.h"
+typedef struct{
+        int running;
+        int waiting;
+        int completed;
+} Status;
+
+typedef struct process{
+        char processName[256];
+        int processTime;
+        Status processStatus;
+        int processPriority;
+        struct process *next;
+} Process;
 
 typedef struct{
-        int priority;
-        int ptime;
-        String name;
-        int num;
-}Process;
+        Process *head;
+        int length;
+} Scheduler;
 
-Process* add(int priority,int ptime,String name,int num);
+Scheduler* create();
+int timeSlice(Scheduler *processes);
+int insertProcess(Scheduler *queue, Process *process);
+Process* removeProcess(Scheduler *queue);
+void dispose(Scheduler *queue);
 
-int scheduler(Process* process);
-
-bool insert(Stack* stack,Process* process);

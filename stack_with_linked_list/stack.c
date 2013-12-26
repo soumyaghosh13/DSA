@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 Stack* createStack(){
-    Stack* stack  = createLinkedList();
+    Stack* stack  = createNode();
     return stack;
 }
 bool push(Stack* stack,void* element){
@@ -13,7 +13,7 @@ bool push(Stack* stack,void* element){
 }
 void* pop(Stack* stack){
     void* data = top(stack);
-    removeNode(stack, stack->length-1);
+    deleteNode(stack, stack->length-1);
     return data;
 }
 void* top(Stack* stack){

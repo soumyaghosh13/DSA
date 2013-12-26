@@ -1,7 +1,7 @@
 #include "linkedList.h"
 #include <stdbool.h>
 
-typedef  LinkedList Stack;
+typedef  DList Stack;
 
 Stack* createStack();
 
