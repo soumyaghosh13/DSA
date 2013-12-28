@@ -10,3 +10,10 @@ Tree createTree(compareFunc cmp){
         return tree;
 };
 
+TreeNode* createTreeNode(void* child){
+        TreeNode *node = calloc(1,sizeof(TreeNode));
+        node->data = child;
+        node->list = NULL;
+        node->parent = NULL;
+        return node;
+};
