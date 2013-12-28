@@ -9,11 +9,13 @@ ArrayList create(int capacity) {
         return list;
 }
 
-void shiftRight(ArrayList *list, int index) {
+void forwardShift(ArrayList *list, int index) {
         int i;
-        for (i = list->length - 1; i >= index; i--) {
-                list->base[i+1] = list->base[i];
-        }
+        if (index < list->length) {
+                for (i = list->length - 1; i >= index; i--) {
+                        list->base[i+1] = list->base[i];
+                }
+        }        
 }
 
 int isFull(ArrayList *list) {
@@ -34,42 +36,76 @@ int insert(ArrayList *list, int index, void* data) {
         if (index < 0 || index > list->length) return 0;
 
         increaseCapacity(list);
-        shiftRight(list, index);
-
+        forwardShift(list, index);
         list->base[index] = data;
         list->length++;
-
         return 1;
 }
-int add(ArrayList *list,void *data){
+
+int add(ArrayList *list, void *data){
+        if(!list) return 0;
         return insert(list, list->length, data);
 }
-void shiftLeft(ArrayList *list, int index) {
-        int i;
-        for(i = index;i < list->length-1;i++){
-        list->base[i] = list->base[i+1];
-    }
+
+void* get(ArrayList list, int index) {
+        if (index < 0 || index >= list.length) return NULL;
+        return list.base[index];
 }
 
-int remove(ArrayList *list,int index){
+void backwordShift(ArrayList *list, int index) {
         int i;
-        if (list == NULL) return 0;
-        if (index < 0 || index > list->length) return 0;
-    shiftLeft(list, index);
-    list->length--;
-    return 1;
+        if (index < list->length-1) {
+                for (i = index; i < list->length; i++) {
+                        list->base[i] = list->base[i+1];
+                }
+        }        
 }
-void* get(ArrayList *list, int index) {
-        if (index < 0 || index >= list->length) return NULL;
-        return list->base[index];
+
+int remove(ArrayList* list, int index){
+        if(index < 0 || index >= list->length) return 0;
+        backwordShift(list, index);
+        list->length--;
+        return 1;
 }
-int search(ArrayList *list, void *searchElement, compare cmpFun){
-        int i;
-        for(i = 0;i < list->length;i++){
-                if(0 == cmpFun(searchElement,list->base[i]))
-                        return i;
+
+int hasNext(Iterator* it){
+        ArrayList *list = it->list;
+        if(list->length <= it->position) return 0;
+        return 1;
+};
+
+void* getNextData(Iterator* it){
+        ArrayList* list = it->list;
+        if(!hasNext(it)) return NULL;
+        return list->base[it->position++];
+}
+
+Iterator getIterator(ArrayList* list){
+        Iterator it;
+        it.list = list;
+        it.position = 0;
+        it.hasNext = &hasNext;
+        it.next = &getNextData;
+        return it;
+}
+
+int search(ArrayList list, void *data, Comparator *areEqual){
+        Iterator it = getIterator(&list);
+        void* currentData;
+        int result;
+        while(it.hasNext(&it)){
+                currentData = it.next(&it);
+                result = areEqual(currentData, data);
+                if(result) return it.position - 1;
         }
         return -1;
+}
+
+void iterate(ArrayList list, ForEach* forEach){
+        int result,index;
+        for(index = 0;index < list.length ;index++){
+                forEach(list.base[index]);
+        }
 }
 
 void dispose(ArrayList *list) {
