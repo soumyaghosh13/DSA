@@ -1,116 +1,153 @@
 #include "testUtils.h"
-#include "LinkedList.h"
+#include "linkedList.h"
 #include <string.h>
 #include <stdlib.h>
 
+//create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-//createLinkedList setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
-
-
-char testElement1, testElement2, testElement3,temp;
-char *insertElement1,*insertElement2,*insertElement3;
-LinkedList* list;
-void* elementToInsertNode;
-
+List* list;
+void* elementToInsert;
+int res;
 
 void assignSpaceAndData(int bytes,void* content){
-        elementToInsertNode = calloc(1,bytes);
-        memcpy(elementToInsertNode,content,bytes);
+        elementToInsert = calloc(1,bytes);
+        memcpy(elementToInsert,content,bytes);
 };
-
 
 void setup(){
-        list = createLinkedList();
-        testElement1 = 20;
-        testElement2 = 40;
-        testElement3 = 60;
-        insertElement1 = malloc(sizeof(int));
-        insertElement2 = malloc(sizeof(int));
-        insertElement3 = malloc(sizeof(int));
-        memcpy(insertElement1,&testElement1,sizeof(int));
-        memcpy(insertElement2,&testElement2,sizeof(int));
-        memcpy(insertElement3,&testElement3,sizeof(int));
+        list = create();
 };
-
 
 void teardown(){
-        free(insertElement1);
-        free(insertElement2);
-        free(insertElement3);
-        free(elementToInsertNode);
-        free(list);
+        dispose(list);
 };
 
-
-void test_creation_of_linked_list(){
-        ASSERT(0 == list->length);
-        ASSERT(NULL == list->head);
+void test_inserting_first_node(){
+        int element = 10;
+        assignSpaceAndData(sizeof(int),&element);
+        res = insert(list,elementToInsert,1);
+        ASSERT(1 == res);
+        ASSERT(element == *(int*)getElement(list,1));
 };
 
-void test_insert_Node_at_first_position_in_list(){
-        temp = insertNode(list,insertElement1,1);
-        temp = insertNode(list,insertElement2,1);
-        ASSERT(40 == *(int*)list->head->data);
-        ASSERT(20 == *(int*)list->head->next->data);
-};
-
-void test_insert_Node_in_middle_of_linked_list(){
-        Node* node;
-        temp = insertNode(list,insertElement1,1);
-        temp = insertNode(list,insertElement2,2);
-        temp = insertNode(list,insertElement3,2);
-        ASSERT(60 == *(int*)list->head->next->data);
-        ASSERT(20 == *(int*)list->head->data);
-        ASSERT(40 == *(int*)list->head->next->next->data);
-};
-
-void test_for_negetive_index_insertion_should_failed(){
-        temp = insertNode(list,insertElement1,-1);
-        ASSERT(0 == temp);
-};
-
-void test_delete_first_node_of_linked_list(){
-        Node* node;
-        temp = insertNode(list,insertElement1,1);
-        temp = insertNode(list,insertElement2,2);
-        node = removeNode(list,1);
-        ASSERT(testElement1 == *(int*)node->data);
-        ASSERT(testElement2 == *(int*)list->head->data);
-};
-
-
-void test_delete_last_node_of_linked_list(){
-        Node* node;
-        temp = insertNode(list,insertElement1,1);
-        temp = insertNode(list,insertElement2,2);
-        node = removeNode(list,2);
-        ASSERT(testElement2 == *(int*)node->data);
-        ASSERT(testElement1 == *(int*)list->head->data);        
-};
-
-
-void test_delete_any_node_of_linked_list(){
-        Node* node;
-        Node* secondNode;
-        temp = insertNode(list,insertElement1,1);
-        temp = insertNode(list,insertElement2,2);
-        temp = insertNode(list,insertElement3,3);
-        node = removeNode(list,2);
-        ASSERT(testElement2 == *(int*)node->data);
-        ASSERT(testElement1 == *(int*)list->head->data);
-        secondNode = list->head->next;
-        ASSERT(testElement3 == *(int*)secondNode->data);
-        ASSERT(testElement1 == *(int*)secondNode->previous->data);
-};
-
-void test_delete_node_when_linked_list_contain_one_node(){
-        Node* node;
-        String element  = "soumya";
+void test_insert_first_node_string(){
+        String element = "soumya";
         assignSpaceAndData(sizeof(String),&element);
-        temp = insertNode(list,elementToInsertNode,1);
-        node = removeNode(list,1);
-        ASSERT(0 == strcmp(element,node->data));
+        res = insert(list,elementToInsert,1);
+        ASSERT(1 == list->length);
+        ASSERT(1 == res);
+        ASSERT(0 == strcmp(element,*(String*)getElement(list,1)));
 };
 
+void test_insert_two_elements_in_linked_list(){
+        void* nodeDeleted;
+        int element1 = 20,element2 =40;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,2);
+        ASSERT(20 == *(int*)getElement(list,1));
+        nodeDeleted = remove(list,1);
+        ASSERT(20 == *(int*)nodeDeleted);
+        ASSERT(40 == *(int*)getElement(list,1));
+};
 
+void test_insert_element_in_middle(){
+        void* node;
+        int element1 = 20,element2 = 40,element3 = 60;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,2);
+        res = insert(list,&element3,2);
+        ASSERT(20 == *(int*)getElement(list,1));
+        ASSERT(60 == *(int*)getElement(list,2));
+        ASSERT(40 == *(int*)getElement(list,3));
+};
 
+void test_insert_at_first_position_in_list(){
+        int element1 = 20,element2 = 40;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,1);
+        ASSERT(40 == *(int*)getElement(list,1));
+        ASSERT(20 == *(int*)getElement(list,2));
+};
+ 
+void test_when_index_is_negative_node_should_not_be_inserted(){
+        int element = 50;
+        res = insert(list,&element,-1);
+        ASSERT(0 == res);
+};
+
+void test_when_index_exceeds_lists_length_then_insertion_should_fail(){
+        int element = 50;
+        res = insert(list,&element,2);
+        ASSERT(0 == res);
+};
+
+void test_deleting_the_char_node_when_only_one_is_present(){
+        void* nodeDeleted;
+        char element = 'S';
+        res = insert(list,&element,1);
+        nodeDeleted = remove(list,1);
+        ASSERT(element == *(char*)nodeDeleted);
+        ASSERT(0 == list->length);
+};
+
+void test_deleting_all_nodes(){
+        void* node;
+        int element1 = 10,element2 = 20,element3 = 30;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,2);
+        res = insert(list,&element3,3);
+        node = remove(list,1);
+        ASSERT(element1 == *(int*)node);
+        node = remove(list,1);
+        ASSERT(element2 == *(int*)node);
+        node = remove(list,1);
+        ASSERT(element3 == *(int*)node);
+};
+
+void test_deleting_node_in_middle(){
+        int element1 = 10,element2 = 20,element3 = 30;
+        void* node;
+        Node* secondNode;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,2);
+        res = insert(list,&element3,3);
+        node = remove(list,2);
+        ASSERT(element2 == *(int*)node);
+        ASSERT(element1 == *(int*)getElement(list,1));
+        ASSERT(element3 == *(int*)getElement(list,2));
+        ASSERT(2 == length(list));
+};
+
+void test_deleting_from_empty_list(){
+        int element1 = 100;
+        Node* node;
+        res = insert(list,&element1,1);
+        node = remove(list,1);
+        ASSERT(element1 == *(int*)node);
+        node = remove(list,1);
+        ASSERT(NULL == node);
+};
+
+void test_when_negative_index_is_given_to_delete(){
+        ASSERT(NULL == remove(list,-1));
+};
+
+void test_iterator(){
+        int element1 = 555,element2 = 666,element3 = 777;
+        Iterator it;
+        void *e1;
+        res = insert(list,&element1,1);
+        res = insert(list,&element2,2);
+        res = insert(list,&element3,3);
+        it = getIterator(list);
+        res = it.hasNext(&it);
+        e1 = it.next(&it);
+        ASSERT(1 == res);
+        ASSERT(555 == *(int*)e1);
+        e1 = it.next(&it);
+        ASSERT(666 == *(int*)e1);
+        e1 = it.next(&it);
+        ASSERT(777 == *(int*)e1);
+        e1 = it.next(&it);
+        ASSERT(NULL == e1);
+};
