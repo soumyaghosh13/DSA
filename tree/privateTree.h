@@ -1,4 +1,4 @@
-#include "../linkedList/linkedList.h"
+#include "linkedList.h"
 
 typedef struct treeNode {
         void* data;
