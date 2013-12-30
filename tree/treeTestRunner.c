@@ -84,6 +84,21 @@ int main(){
 		test_removing_leaf_node();
 	tearDown();
 	testEnded();
+	testStarted("test_removing_node_with_childs_should_fail");
+	setup();
+		test_removing_node_with_childs_should_fail();
+	tearDown();
+	testEnded();
+	testStarted("test_remove_root_node");
+	setup();
+		test_remove_root_node();
+	tearDown();
+	testEnded();
+	testStarted("test_remove_absent_node_should_fail");
+	setup();
+		test_remove_absent_node_should_fail();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

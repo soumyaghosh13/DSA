@@ -89,3 +89,30 @@ void test_removing_leaf_node(){
         ASSERT(NULL == it.next(&it));
         disposeTree(&tree);
 };
+
+void test_removing_node_with_childs_should_fail(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 10,element2 = 20,element3 = 30,element4 = 40;
+        insertTreeNode(&tree,NULL,&element1);
+        insertTreeNode(&tree,&element1,&element2);
+        ASSERT(0 == removeSpecificNode(&tree,&element1));
+        disposeTree(&tree);
+};
+
+void test_remove_root_node(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 10;
+        insertTreeNode(&tree,NULL,&element1);
+        ASSERT(1 == removeSpecificNode(&tree,&element1));
+        ASSERT(0 == search(&tree,&element1));
+};
+
+void test_remove_absent_node_should_fail(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 10,element2 = 20,element3 = 30;
+        Iterator it;
+        insertTreeNode(&tree,NULL,&element1);
+        insertTreeNode(&tree,&element1,&element2);
+        ASSERT(0 == removeSpecificNode(&tree,&element3));
+        disposeTree(&tree);
+};
