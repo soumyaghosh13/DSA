@@ -69,6 +69,11 @@ int main(){
 		test_search_for_root_node();
 	tearDown();
 	testEnded();
+	testStarted("test_search_for_child_of_root");
+	setup();
+		test_search_for_child_of_root();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

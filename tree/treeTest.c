@@ -53,3 +53,14 @@ void test_search_for_root_node(){
         ASSERT(1 == search(&tree,&element1));
         disposeTree(&tree);
 };
+
+void test_search_for_child_of_root(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 555,element2 = 666,element3 = 777;
+        insertTreeNode(&tree,NULL,&element1);
+        insertTreeNode(&tree,&element1,&element2);
+        insertTreeNode(&tree,&element1,&element3);
+        ASSERT(1 == search(&tree,&element2));
+        ASSERT(1 == search(&tree,&element3));
+        disposeTree(&tree);
+};
