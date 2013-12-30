@@ -84,3 +84,14 @@ void test_deleting_element_having_specific_key(){
         disposeHashMap(&map);
 };
 
+void test_deleting_element_when_absent(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        ASSERT(0 == removeHashObject(&map,&roll22));
+        disposeHashMap(&map);
+};
+
+void test_deleting_when_key_is_null_should_fail(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        ASSERT(0 == removeHashObject(&map,NULL));
+        disposeHashMap(&map);
+};

@@ -84,6 +84,16 @@ int main(){
 		test_deleting_element_having_specific_key();
 	tearDown();
 	testEnded();
+	testStarted("test_deleting_element_when_absent");
+	setup();
+		test_deleting_element_when_absent();
+	tearDown();
+	testEnded();
+	testStarted("test_deleting_when_key_is_null_should_fail");
+	setup();
+		test_deleting_when_key_is_null_should_fail();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
