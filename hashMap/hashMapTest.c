@@ -23,7 +23,7 @@ int cmpInt(void *first,void *second){
 
 void test_put_first_element_in_list(){
         Student soumya = {22,"soumya"};
-        HashMap map = createHashMap(getHashCode,cmpInt,22);
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
         ASSERT(1 == put(&map,&roll22,&soumya.name));
         ASSERT(0 == strcmp(soumya.name,getHashObject(&map,&roll22)));
         disposeHashMap(&map);
@@ -40,5 +40,18 @@ void test_put_multiple_elements(){
         ASSERT(0 == strcmp(soumya.name,getHashObject(&map,&roll22)));
         ASSERT(0 == strcmp(sam.name,getHashObject(&map,&roll15)));
         ASSERT(0 == strcmp(buka.name,getHashObject(&map,&roll10)));
+        disposeHashMap(&map);
+};
+
+void test_same_key_should_update_value(){
+        Iterator it;
+        Student Soumya = {22,"Soumya"};
+        Student Sam = {10,"Sam"};
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        put(&map,&roll22,&Soumya.name);
+        put(&map,&roll22,&Sam.name);
+        it = keys(&map);
+        ASSERT(0 == strcmp(Sam.name,getHashObject(&map,&roll22)));
+        ASSERT(0 != strcmp(Soumya.name,getHashObject(&map,&roll22)));
         disposeHashMap(&map);
 };

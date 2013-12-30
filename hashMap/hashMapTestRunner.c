@@ -59,6 +59,11 @@ int main(){
 		test_put_multiple_elements();
 	tearDown();
 	testEnded();
+	testStarted("test_same_key_should_update_value");
+	setup();
+		test_same_key_should_update_value();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
