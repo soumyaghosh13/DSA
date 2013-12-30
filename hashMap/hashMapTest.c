@@ -95,3 +95,20 @@ void test_deleting_when_key_is_null_should_fail(){
         ASSERT(0 == removeHashObject(&map,NULL));
         disposeHashMap(&map);
 };
+
+void test_iterate_over_hash_map(){
+        Student soumya = {10,"soumya"};
+        Student sam = {20,"sam"};
+        Student buka = {11,"buka"};
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        Iterator it;
+        put(&map,&roll22,&soumya.name);
+        put(&map,&roll15,&buka.name);
+        put(&map,&roll10,&sam.name);
+        it = keys(&map);
+        ASSERT(15 == *(int*)it.next(&it));
+        ASSERT(22 == *(int*)it.next(&it));
+        ASSERT(10 == *(int*)it.next(&it));
+        ASSERT(NULL == it.next(&it));
+        disposeHashMap(&map);
+};

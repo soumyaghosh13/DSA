@@ -94,6 +94,11 @@ int main(){
 		test_deleting_when_key_is_null_should_fail();
 	tearDown();
 	testEnded();
+	testStarted("test_iterate_over_hash_map");
+	setup();
+		test_iterate_over_hash_map();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
