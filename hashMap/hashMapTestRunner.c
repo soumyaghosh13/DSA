@@ -99,6 +99,11 @@ int main(){
 		test_iterate_over_hash_map();
 	tearDown();
 	testEnded();
+	testStarted("test_iterating_gives_null_if_there_is_no_element");
+	setup();
+		test_iterating_gives_null_if_there_is_no_element();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

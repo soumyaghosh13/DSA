@@ -112,3 +112,12 @@ void test_iterate_over_hash_map(){
         ASSERT(NULL == it.next(&it));
         disposeHashMap(&map);
 };
+
+void test_iterating_gives_null_if_there_is_no_element(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        Iterator it;
+        it = keys(&map);
+        ASSERT(0 == it.hasNext(&it));
+        ASSERT(NULL == it.next(&it));
+        disposeHashMap(&map);
+};
