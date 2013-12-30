@@ -1,12 +1,24 @@
-/*
-	getHashCode
-	Hasing(modulas)
-	store, search, remove
-	create(compare)
-	put(hashCode Generator, compare)
-	remove(hashMap,data)
-	get(hashMap,key)
-	keys(hashMap)
-	dispose()
-	reHashing()
-*/
+#include "iterator.h"
+
+typedef int (*HashCodeGenerator)(void *key);
+
+typedef int (*compareFunc)(void *first,void *second);
+
+typedef struct {
+        void *buckets;
+        int capacity;
+        HashCodeGenerator getHashCode;
+        compareFunc compare;
+} HashMap;
+
+HashMap createHashMap(HashCodeGenerator getHashCode,compareFunc cmp,int capacity);
+
+int put(HashMap *map,void *key,void *data);
+
+void *getHashObject(HashMap *map,void *key);
+
+int removeHashObject(HashMap *map,void *key);
+
+Iterator keys(HashMap *map);
+
+void disposeHashMap(HashMap *map);
