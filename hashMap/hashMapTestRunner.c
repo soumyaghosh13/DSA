@@ -104,6 +104,11 @@ int main(){
 		test_iterating_gives_null_if_there_is_no_element();
 	tearDown();
 	testEnded();
+	testStarted("test_map_should_rehash_when_elements_in_bucket_are_more_than_3");
+	setup();
+		test_map_should_rehash_when_elements_in_bucket_are_more_than_3();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

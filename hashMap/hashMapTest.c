@@ -7,6 +7,7 @@
 int roll22 = 22;
 int roll15 = 15;
 int roll10 = 10;
+int roll5 = 5;
 
 typedef struct {
         int roll;
@@ -118,6 +119,26 @@ void test_iterating_gives_null_if_there_is_no_element(){
         Iterator it;
         it = keys(&map);
         ASSERT(0 == it.hasNext(&it));
+        ASSERT(NULL == it.next(&it));
+        disposeHashMap(&map);
+};
+
+void test_map_should_rehash_when_elements_in_bucket_are_more_than_3(){
+        Iterator it;
+        Student soumya = {10,"soumya"};
+        Student sam = {20,"sam"};
+        Student buka = {30,"buka"};
+        Student guru = {40,"guru"};
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        put(&map,&roll22,&soumya.name);
+        put(&map,&roll15,&sam.name);
+        put(&map,&roll10,&buka.name);
+        put(&map,&roll5,&guru.name);
+        it = keys(&map);
+        ASSERT(15 == *(int*)it.next(&it));
+        ASSERT(5 == *(int*)it.next(&it));
+        ASSERT(22 == *(int*)it.next(&it));
+        ASSERT(10 == *(int*)it.next(&it));
         ASSERT(NULL == it.next(&it));
         disposeHashMap(&map);
 };
