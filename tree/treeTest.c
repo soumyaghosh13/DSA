@@ -77,3 +77,15 @@ void test_search_two_level_below_root(){
         ASSERT(1 == search(&tree,&element4));
         disposeTree(&tree);
 };
+
+void test_removing_leaf_node(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 10,element2 = 20;
+        Iterator it;
+        insertTreeNode(&tree,NULL,&element1);
+        insertTreeNode(&tree,&element1,&element2);
+        ASSERT(1 == removeSpecificNode(&tree,&element2));
+        it = getChildren(&tree,&element1);
+        ASSERT(NULL == it.next(&it));
+        disposeTree(&tree);
+};

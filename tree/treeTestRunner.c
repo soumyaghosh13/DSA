@@ -79,6 +79,11 @@ int main(){
 		test_search_two_level_below_root();
 	tearDown();
 	testEnded();
+	testStarted("test_removing_leaf_node");
+	setup();
+		test_removing_leaf_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
