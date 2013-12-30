@@ -64,6 +64,21 @@ int main(){
 		test_same_key_should_update_value();
 	tearDown();
 	testEnded();
+	testStarted("test_put_should_fail_when_key_is_null");
+	setup();
+		test_put_should_fail_when_key_is_null();
+	tearDown();
+	testEnded();
+	testStarted("test_get_null_when_element_is_absent");
+	setup();
+		test_get_null_when_element_is_absent();
+	tearDown();
+	testEnded();
+	testStarted("test_get_element_should_fail_when_key_is_null");
+	setup();
+		test_get_element_should_fail_when_key_is_null();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

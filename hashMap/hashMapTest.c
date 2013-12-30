@@ -55,3 +55,23 @@ void test_same_key_should_update_value(){
         ASSERT(0 != strcmp(Soumya.name,getHashObject(&map,&roll22)));
         disposeHashMap(&map);
 };
+
+void test_put_should_fail_when_key_is_null(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        Student soumya = {10,"soumya"};
+        ASSERT(0 == put(&map,NULL,&soumya.name));        
+        disposeHashMap(&map);
+};
+
+void test_get_null_when_element_is_absent(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        ASSERT(NULL == getHashObject(&map,&roll22));
+        disposeHashMap(&map);
+};
+
+void test_get_element_should_fail_when_key_is_null(){
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        ASSERT(NULL == getHashObject(&map,NULL));
+        disposeHashMap(&map);
+};
+
