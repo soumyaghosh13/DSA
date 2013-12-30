@@ -53,7 +53,7 @@ int search(void* tree,void* parent){
         return 0;
 };
 
-int insertNode(Tree *tree,void *parent,void *child){
+int insertTreeNode(Tree *tree,void *parent,void *child){
         TreeNode *node = createTreeNode(child);
         TreeNode *matchedTreeNode;
         List* list;
