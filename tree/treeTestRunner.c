@@ -59,9 +59,14 @@ int main(){
 		test_insert_first_node_as_child_of_root();
 	tearDown();
 	testEnded();
-	testStarted("test_insert_node_in_1_level_below_root");
+	testStarted("test_insert_node_in_2_level_below_root");
 	setup();
-		test_insert_node_in_1_level_below_root();
+		test_insert_node_in_2_level_below_root();
+	tearDown();
+	testEnded();
+	testStarted("test_search_for_root_node");
+	setup();
+		test_search_for_root_node();
 	tearDown();
 	testEnded();
 

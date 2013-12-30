@@ -45,3 +45,11 @@ void test_insert_node_in_2_level_below_root(){
         ASSERT(element3 == *(int*)it.next(&it));
         disposeTree(&tree);
 };
+
+void test_search_for_root_node(){
+        Tree tree = createRoot(cmpInt);
+        int element1 =555;
+        ASSERT(1 == insertTreeNode(&tree,NULL,&element1));
+        ASSERT(1 == search(&tree,&element1));
+        disposeTree(&tree);
+};
