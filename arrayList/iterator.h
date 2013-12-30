@@ -2,10 +2,10 @@
 #define _ITERATOR_
 
 typedef struct iterator{
-        int position;
+        void* current;
         void* list;
-        void* (*next)(struct iterator *it);
-        int (*hasNext)(struct iterator *it);
+        void* (*next)(struct iterator* it);
+        int (*hasNext)(struct iterator* it);
 } Iterator;
 
 #endif

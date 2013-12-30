@@ -1,20 +1,31 @@
 #include "iterator.h"
+
 typedef struct {
         void** base;
         int capacity;
         int length;
 } ArrayList;
 
-typedef int Comparator (void* first,void* second);
+typedef int (*CompareFunc)(void* first,void* second);
+
 typedef void ForEach(void* data);
 
-ArrayList create(int capacity);
+ArrayList createArrayList(int capacity);
 
-int insert(ArrayList *list, int index, void* data);
-void* get(ArrayList list, int index);
-int remove(ArrayList* list, int index);
-int add(ArrayList* list, void* data);
-int search(ArrayList list, void* data, Comparator* areEqual);
-Iterator getIterator(ArrayList* list);
-void dispose(ArrayList *list);
+void disposeArrayList(ArrayList *list);
+
+int insertInArrayList(ArrayList *list, int index, void* data);
+
+int addInArrayList(ArrayList *list,void *data);
+
+int removeFromArrayList(ArrayList *list,int index);
+
+int search(ArrayList *list,void* data,CompareFunc cmp);
+
+int getLength(ArrayList *list);
+
+void* get(ArrayList *list, int index);
+
+Iterator getArrayListIterator(ArrayList *list);
+
 void iterate(ArrayList list, ForEach* forEach);
