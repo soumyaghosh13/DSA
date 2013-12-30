@@ -132,6 +132,26 @@ Iterator keys(HashMap *map){
         return it;
 };
 
+int removeHashObject(HashMap *map,void *key){
+        List *list;
+        HashElement *object;
+        Iterator it;
+        int index = 1,hash;
+        if(key == NULL || map == NULL) return 0;
+        hash = calculateHash(map,key);
+        list = get(map->buckets,hash);
+        it = getIterator(list);
+        while(it.hasNext(&it)){
+                object = it.next(&it);
+                if(map->compare(object->key,key)){
+                        remove(list,index);
+                        return 1;
+                }
+                index++;
+        }
+        return 0;
+};
+
 void disposeHashMap(HashMap *map){
         int i;
         List *listOfHashObjects;

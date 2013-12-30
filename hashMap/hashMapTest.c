@@ -75,3 +75,12 @@ void test_get_element_should_fail_when_key_is_null(){
         disposeHashMap(&map);
 };
 
+void test_deleting_element_having_specific_key(){
+        Student soumya = {22,"soumya"};
+        HashMap map = createHashMap(getHashCode,cmpInt,10);
+        put(&map,&roll22,&soumya.name);
+        ASSERT(1 == removeHashObject(&map,&roll22));
+        ASSERT(NULL == getHashObject(&map,&roll22));
+        disposeHashMap(&map);
+};
+

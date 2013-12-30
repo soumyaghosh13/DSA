@@ -79,6 +79,11 @@ int main(){
 		test_get_element_should_fail_when_key_is_null();
 	tearDown();
 	testEnded();
+	testStarted("test_deleting_element_having_specific_key");
+	setup();
+		test_deleting_element_having_specific_key();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
