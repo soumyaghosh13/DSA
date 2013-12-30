@@ -74,6 +74,11 @@ int main(){
 		test_search_for_child_of_root();
 	tearDown();
 	testEnded();
+	testStarted("test_search_two_level_below_root");
+	setup();
+		test_search_two_level_below_root();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

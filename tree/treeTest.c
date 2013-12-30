@@ -64,3 +64,16 @@ void test_search_for_child_of_root(){
         ASSERT(1 == search(&tree,&element3));
         disposeTree(&tree);
 };
+
+
+void test_search_two_level_below_root(){
+        Tree tree = createRoot(cmpInt);
+        int element1 = 10,element2 = 20,element3 = 30,element4 = 40;
+        insertTreeNode(&tree,NULL,&element1);
+        insertTreeNode(&tree,&element1,&element2);
+        insertTreeNode(&tree,&element2,&element3);
+        insertTreeNode(&tree,&element2,&element4);
+        ASSERT(1 == search(&tree,&element3));
+        ASSERT(1 == search(&tree,&element4));
+        disposeTree(&tree);
+};
