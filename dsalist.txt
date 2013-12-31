@@ -1,0 +1,19 @@
+	stack-with-memcpy 	=>	done
+	stack 				=>	done
+	bracket-matching 	=>	done
+	insertion-sort	    =>	done
+	queue 				=>	done
+	circular-queue 		=>	done
+	linked-list 		=>	done
+	binary-search 		=>	done
+	priority-queue 		=>	done
+	os-scheduler 		=>	done
+	Dynamic stack 		=>	done
+	Tree 				=>	done
+	ArrayList 			=>	done
+	HashMap 			=>	done
+	bubble sort 		=>	done
+	merge sort 			=>	done
+
+	arrayList 			=>	refactor
+	linked list 		=>	refactor
