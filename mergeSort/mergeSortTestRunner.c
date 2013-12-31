@@ -54,6 +54,26 @@ int main(){
 		test_single_element_is_always_sorted();
 	tearDown();
 	testEnded();
+	testStarted("test_sort_for_even_number_of_element_best_case");
+	setup();
+		test_sort_for_even_number_of_element_best_case();
+	tearDown();
+	testEnded();
+	testStarted("test_sort_for_odd_number_of_element_worst_case");
+	setup();
+		test_sort_for_odd_number_of_element_worst_case();
+	tearDown();
+	testEnded();
+	testStarted("test_to_sort_char_data");
+	setup();
+		test_to_sort_char_data();
+	tearDown();
+	testEnded();
+	testStarted("test_to_sort_Student_data");
+	setup();
+		test_to_sort_Student_data();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
